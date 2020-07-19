@@ -1,0 +1,4 @@
+anchorecli
+ansible-lint
+detect-secrets
+trufflehog
