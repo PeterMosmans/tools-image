@@ -48,7 +48,8 @@ RUN ln -s /usr/lib/sonar-scanner/bin/sonar-scanner /usr/local/bin/sonar-scanner
 RUN ln -s /usr/lib/nikto/nikto.pl /usr/local/bin/nikto.pl
 
 # Install necessary binaries
-RUN apt-get update && apt-get install -y --no-install-recommends\
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
     git \
     libnet-ssleay-perl \
     python3 \
