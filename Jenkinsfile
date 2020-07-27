@@ -1,18 +1,38 @@
 // This pipeline revolves around building a Docker image:
-// - Build: Builds a Docker image
-// - Test: Perform basic tests for the image
+// - Lint: Lints a Dockerfile using hadolint
+// - Build and test: Builds and tests a Docker image
 // - Push: Pushes the image to the registry
 
 pipeline {
+    agent any
+
     environment { // Environment variables defined for all steps
         TOOLS_IMAGE = "registry.demo.local:5000/tools-image"
     }
 
-    agent any
-
     stages {
+        stage("Lint") {
+            agent {
+                docker {
+                    image "docker.io/hadolint/hadolint:v1.18.0"
+                    reuseNode true
+                }
+            }
+            steps {
+                script {
+                    def result = sh label: "Lint Dockerfile",
+                        script: """\
+                            hadolint Dockerfile > hadolint-results.txt
+                        """,
+                    returnStatus: true
+                    if (result > 0) {
+                        unstable(message: "Linting issues found")
+                    }
+                }
+            }
+        }
+
         stage("Build and test image") {
-            agent any
             steps {
                 script {
                     def image = docker.build("$TOOLS_IMAGE")
@@ -38,7 +58,6 @@ pipeline {
         }
 
         stage("Push to registry") {
-            agent any
             steps {
                 script {
                     // Use commit tag if it has been tagged
