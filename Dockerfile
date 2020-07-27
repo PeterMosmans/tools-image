@@ -48,7 +48,7 @@ RUN ln -s /usr/lib/sonar-scanner/bin/sonar-scanner /usr/local/bin/sonar-scanner
 RUN ln -s /usr/lib/nikto/nikto.pl /usr/local/bin/nikto.pl
 
 # Install necessary binaries
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN apt-get update && apt-get install -y --no-install-recommends\
     curl \
     git \
     libnet-ssleay-perl \
@@ -63,7 +63,7 @@ RUN npm install --global npm@latest
 ENV PATH="/opt/venv/bin:$PATH"
 ENV SONAR_RUNNER_HOME=/usr/lib/sonar-scanner SONAR_USER_HOME=/tmp
 ENV LC_ALL=C.UTF-8
-ENV ANCHORE_CLI_URL=http://anchore_api_1:8228/v1 ANCHORE_CLI_USER=admin ANCHORE_CLI_PASS=foobar
+ENV ANCHORE_CLI_URL=http://anchore-engine_api_1:8228/v1 ANCHORE_CLI_USER=admin ANCHORE_CLI_PASS=foobar
 
 RUN groupadd -r tool && \
     useradd --create-home --no-log-init --shell /bin/bash --system --gid tool --groups tool,node tool && \
