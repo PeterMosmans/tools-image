@@ -20,6 +20,8 @@ pipeline {
                     image.inside("--volume /etc/passwd:/etc/passwd:ro") {
                         sh label: "Test anchore-cli",
                             script: "anchore-cli --version"
+                        sh label: "Test curl",
+                            script: "curl --version"
                         sh label: "Test detect-secrets",
                             script: "detect-secrets --version"
                         sh label: "Test nikto.pl",
