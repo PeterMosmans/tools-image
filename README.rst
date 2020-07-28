@@ -11,3 +11,17 @@ Python libraries.
 
 The accompanying ``Jenkinsfile`` can be used to automatically build, test and
 push the image using the build and automation server Jenkins.
+
+A prebuilt Docker image can be found on
+https://hub.docker.com/repository/docker/gofwd/tools-image and downloaded from
+docker.io using the tag ``gofwd/tools-image``
+
+
+The following tools are available:
+
++ anchore-cli
++ ansible-lint
++ detect-secrets
++ nikto.pl
++ testssl.sh
++ trufflehog
