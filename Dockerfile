@@ -40,18 +40,32 @@ RUN git clone --depth=1 https://github.com/sullo/nikto /tmp/nikto && \
     rm -rf /tmp/nikto/program/.git && \
     mv /tmp/nikto/program /usr/lib/nikto
 
+# Clone testssl.sh
+RUN git clone --depth=1 https://github.com/drwetter/testssl.sh /tmp/testssl && \
+    mkdir /usr/lib/testssl && \
+    mv /tmp/testssl/bin/openssl.Linux.x86_64 /usr/lib/testssl/openssl && \
+    chmod ugo+x /usr/lib/testssl/openssl && \
+    mv /tmp/testssl/etc/ /usr/lib/testssl/etc/ && \
+    mv /tmp/testssl/testssl.sh /usr/lib/testssl/testssl.sh && \
+    chmod ugo+x /usr/lib/testssl/testssl.sh
+
 FROM node:lts-slim as release
 COPY --from=build /opt/venv /opt/venv
-COPY --from=build /usr/lib/sonar-scanner/ /usr/lib/sonar-scanner/
 COPY --from=build /usr/lib/nikto/ /usr/lib/nikto/
-RUN ln -s /usr/lib/sonar-scanner/bin/sonar-scanner /usr/local/bin/sonar-scanner
+COPY --from=build /usr/lib/sonar-scanner/ /usr/lib/sonar-scanner/
+COPY --from=build /usr/lib/testssl/ /usr/lib/testssl/
 RUN ln -s /usr/lib/nikto/nikto.pl /usr/local/bin/nikto.pl
+RUN ln -s /usr/lib/sonar-scanner/bin/sonar-scanner /usr/local/bin/sonar-scanner
+RUN ln -s /usr/lib/testssl/testssl.sh /usr/local/bin/testssl.sh
 
 # Install necessary binaries
 RUN apt-get update && apt-get install -y --no-install-recommends\
+    bsdmainutils \
     curl \
+    dnsutils \
     git \
     libnet-ssleay-perl \
+    procps \
     python3 \
     python3-venv \
     && apt-get clean \
