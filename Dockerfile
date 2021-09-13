@@ -1,5 +1,5 @@
 # Use a base image to build (and download) the tools on
-FROM node:lts-slim as build
+FROM node:current-bullseye-slim as build
 
 LABEL maintainer="support@go-forward.net"
 LABEL vendor="Go Forward"
@@ -26,9 +26,9 @@ RUN python3 -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 
 # Install wheel first, as that is not installed by default
-RUN pip3 install wheel
+RUN python3 -m pip install wheel
 # Install packages as specified in the requirements.txt file
-RUN pip3 install -r requirements.txt
+RUN python3 -m pip install -r requirements.txt
 
 # Download and unzip sonar-scanner-cli
 RUN curl -sL https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.2.0.1873-linux.zip -o /tmp/scanner.zip && \
@@ -49,7 +49,7 @@ RUN git clone --depth=1 https://github.com/drwetter/testssl.sh /tmp/testssl && \
     mv /tmp/testssl/testssl.sh /usr/lib/testssl/testssl.sh && \
     chmod ugo+x /usr/lib/testssl/testssl.sh
 
-FROM node:lts-slim as release
+FROM node:current-bullseye-slim as release
 COPY --from=build /opt/venv /opt/venv
 COPY --from=build /usr/lib/nikto/ /usr/lib/nikto/
 COPY --from=build /usr/lib/sonar-scanner/ /usr/lib/sonar-scanner/
