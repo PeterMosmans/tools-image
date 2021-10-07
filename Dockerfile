@@ -74,6 +74,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends\
 # Update node package manager
 RUN npm install --global npm@latest
 
+# Update packages
+RUN npm update
+
 ENV PATH="/opt/venv/bin:$PATH"
 ENV SONAR_RUNNER_HOME=/usr/lib/sonar-scanner SONAR_USER_HOME=/tmp
 ENV LC_ALL=C.UTF-8
