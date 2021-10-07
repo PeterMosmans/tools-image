@@ -9,6 +9,7 @@ COPY requirements.txt .
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Install necessary binaries
+# hadolint ignore=DL3008
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates \
     curl \
@@ -59,6 +60,7 @@ RUN ln -s /usr/lib/sonar-scanner/bin/sonar-scanner /usr/local/bin/sonar-scanner
 RUN ln -s /usr/lib/testssl/testssl.sh /usr/local/bin/testssl.sh
 
 # Install necessary binaries
+# hadolint ignore=DL3008
 RUN apt-get update && apt-get install -y --no-install-recommends\
     bsdmainutils \
     curl \
