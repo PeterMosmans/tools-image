@@ -83,6 +83,7 @@ ENV PATH="/opt/venv/bin:$PATH"
 ENV SONAR_RUNNER_HOME=/usr/lib/sonar-scanner SONAR_USER_HOME=/tmp
 ENV LC_ALL=C.UTF-8
 ENV ANCHORE_CLI_URL=http://anchore-engine_api_1:8228/v1 ANCHORE_CLI_USER=admin ANCHORE_CLI_PASS=foobar
+ENV NODE_PATH=/usr/local/lib/node_modules
 
 RUN groupadd -r tool && \
     useradd --create-home --no-log-init --shell /bin/bash --system --gid tool --groups tool,node tool && \
