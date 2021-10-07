@@ -73,8 +73,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends\
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# Update node package manager
-RUN npm install --global npm@latest
+# Update node package manager and typescript package
+RUN npm install --global npm@latest typescript@latest
 
 # Update packages
 RUN npm update --global
