@@ -76,4 +76,10 @@ pipeline {
             }
         }
     }
+
+    post {
+        always {
+            archiveArtifacts artifacts: "*-results.txt"
+        }
+    }
 }
