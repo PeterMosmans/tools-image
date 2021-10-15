@@ -7,7 +7,7 @@ pipeline {
     agent any
 
     environment { // Environment variables defined for all steps
-        TOOLS_IMAGE = "registry.demo.local:5000/tools-image"
+        DOCKER_IMAGE = "registry.demo.local:5000/tools-image"
     }
 
     stages {
@@ -35,13 +35,24 @@ pipeline {
         stage("Build and test image") {
             steps {
                 script {
-                    def image = docker.build("$TOOLS_IMAGE")
+                    // Use commit tag if it has been tagged
+                    tag = sh(returnStdout: true, script: "git tag --contains").trim()
+                    if ("$tag" == "") {
+                        if ("${BRANCH_NAME}" == "master") {
+                            tag = "latest"
+                        } else {
+                            tag = "${BRANCH_NAME}"
+                        }
+                    }
+                    def image = docker.build("$DOCKER_IMAGE", "--build-arg 'BUILDKIT_INLINE_CACHE=1' --cache-from $DOCKER_IMAGE:$tag --cache-from $DOCKER_IMAGE:latest .")
                     // Make sure that the user ID exists within the container
                     image.inside("--volume /etc/passwd:/etc/passwd:ro") {
                         sh label: "Test anchore-cli",
                             script: "anchore-cli --version"
                         sh label: "Test curl",
                             script: "curl --version"
+                        sh label: "Test cyclonedx",
+                            script: "cyclonedx-py --help"
                         sh label: "Test detect-secrets",
                             script: "detect-secrets --version"
                         sh label: "Test nikto.pl",
@@ -69,9 +80,9 @@ pipeline {
                             tag = "${BRANCH_NAME}"
                         }
                     }
-                    sh "docker tag $TOOLS_IMAGE $TOOLS_IMAGE:$tag"
+                    sh "docker tag $DOCKER_IMAGE $DOCKER_IMAGE:$tag"
                     // By specifying only the image name, all tags will automatically be pushed
-                    sh "docker push $TOOLS_IMAGE"
+                    sh "docker push $DOCKER_IMAGE"
                 }
             }
         }

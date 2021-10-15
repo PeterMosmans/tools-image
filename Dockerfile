@@ -74,7 +74,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends\
     && rm -rf /var/lib/apt/lists/*
 
 # Update node package manager and typescript package
-RUN npm install --global npm@latest typescript@latest
+RUN npm install --global npm@latest typescript@latest @cyclonedx/bom@latest
 
 # Update packages
 RUN npm update --global
