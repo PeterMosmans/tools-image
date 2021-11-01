@@ -66,6 +66,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends\
     curl \
     dnsutils \
     git \
+    jq \
     libnet-ssleay-perl \
     procps \
     python3 \
