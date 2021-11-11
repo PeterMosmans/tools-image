@@ -1,9 +1,11 @@
 # Use a base image to build (and download) the tools on
+
 FROM node:current-bullseye-slim as build
 
 LABEL maintainer="support@go-forward.net"
 LABEL vendor="Go Forward"
 
+WORKDIR /
 COPY requirements.txt .
 
 ENV DEBIAN_FRONTEND=noninteractive
@@ -55,9 +57,9 @@ COPY --from=build /opt/venv /opt/venv
 COPY --from=build /usr/lib/nikto/ /usr/lib/nikto/
 COPY --from=build /usr/lib/sonar-scanner/ /usr/lib/sonar-scanner/
 COPY --from=build /usr/lib/testssl/ /usr/lib/testssl/
-RUN ln -s /usr/lib/nikto/nikto.pl /usr/local/bin/nikto.pl
-RUN ln -s /usr/lib/sonar-scanner/bin/sonar-scanner /usr/local/bin/sonar-scanner
-RUN ln -s /usr/lib/testssl/testssl.sh /usr/local/bin/testssl.sh
+RUN ln -s /usr/lib/nikto/nikto.pl /usr/local/bin/nikto.pl && \
+    ln -s /usr/lib/sonar-scanner/bin/sonar-scanner /usr/local/bin/sonar-scanner && \
+    ln -s /usr/lib/testssl/testssl.sh /usr/local/bin/testssl.sh
 
 # Install necessary binaries
 # hadolint ignore=DL3008
