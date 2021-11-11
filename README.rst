@@ -20,8 +20,9 @@ docker.io using the tag ``gofwd/tools-image``
 The following tools are available:
 
 + anchore-cli
-+ ansible-lint
-+ detect-secrets
++ cyclonedx-bom
 + nikto.pl
++ sonar-scanner
 + testssl.sh
 + trufflehog
++ yamllint

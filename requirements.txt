@@ -1,5 +1,5 @@
 anchorecli
-ansible-lint
 cyclonedx-bom
 detect-secrets
 trufflehog
+yamllint
