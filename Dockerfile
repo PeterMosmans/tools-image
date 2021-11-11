@@ -28,15 +28,16 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN python3 -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 
-# Install wheel first, as that is not installed by default
-RUN python3 -m pip install wheel
+# Install the latest version of wheel first, as that is not installed by default
+# hadolint ignore=DL3013
+RUN python3 -m pip install wheel --no-cache-dir
 # Install packages as specified in the requirements.txt file
-RUN python3 -m pip install -r requirements.txt
+RUN python3 -m pip install -r requirements.txt --no-cache-dir
 
 # Download and unzip sonar-scanner-cli
-RUN curl -sL https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.2.0.1873-linux.zip -o /tmp/scanner.zip && \
+RUN curl -sL https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-linux.zip -o /tmp/scanner.zip && \
     unzip /tmp/scanner.zip -d /tmp/sonarscanner && \
-    mv /tmp/sonarscanner/sonar-scanner-4.2.0.1873-linux /usr/lib/sonar-scanner
+    mv /tmp/sonarscanner/sonar-scanner-4.6.2.2472-linux /usr/lib/sonar-scanner
 
 # Clone nikto.pl
 RUN git clone --depth=1 https://github.com/sullo/nikto /tmp/nikto && \
