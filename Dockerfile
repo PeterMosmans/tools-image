@@ -64,7 +64,7 @@ RUN ln -s /usr/lib/nikto/nikto.pl /usr/local/bin/nikto.pl && \
 
 # Install necessary binaries
 # hadolint ignore=DL3008
-RUN apt-get update && apt-get install -y --no-install-recommends\
+RUN apt-get update && apt-get install -y --no-install-recommends \
     bsdmainutils \
     curl \
     dnsutils \
@@ -78,10 +78,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends\
     && rm -rf /var/lib/apt/lists/*
 
 # Update node package manager and typescript package
-RUN npm install --global npm@latest typescript@latest @cyclonedx/bom@latest
-
 # Update packages
-RUN npm update --global
+RUN npm install --global npm@latest typescript@latest @cyclonedx/bom@latest && \
+    npm update --global && \
+    npm cache clean --force
+
 
 ENV PATH="/opt/venv/bin:$PATH"
 ENV SONAR_RUNNER_HOME=/usr/lib/sonar-scanner SONAR_USER_HOME=/tmp
