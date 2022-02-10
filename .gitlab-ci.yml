@@ -1,0 +1,25 @@
+---
+variables:
+  IMAGE_TAG: ${CI_PROJECT_NAME}:${CI_COMMIT_SHORT_SHA}
+
+stages:
+  - build
+  - test
+
+build:
+  stage: build
+  script:
+    - docker build -t ${IMAGE_TAG} .
+
+test:
+  stage: test
+  image: ${IMAGE_TAG}
+  script:
+    - anchore-cli --version
+    - curl --version
+    - cyclonedx-py --help
+    - detect-secrets --version
+    - nikto.pl -Version
+    - npm outdated --global
+    - sonar-scanner --version
+    - trufflehog --help
