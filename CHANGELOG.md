@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/PeterMosmans/tools-image/compare/1.1.0...1.2.0) (2022-02-10)
+
+### Features
+
+- add basic GitLab pipeline
+  ([6ca3523](https://github.com/PeterMosmans/tools-image/commit/6ca35234e875bd4d9b59a771e064a386b612cad2))
+
 ## 1.1.0 (2022-02-08)
 
 ### Features
