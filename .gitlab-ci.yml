@@ -1,21 +1,31 @@
 ---
+include:
+  - project: tooling/pipeline
+    file: docker.yml
+    ref: main
+  - project: tooling/pipeline
+    file: docker_push.yml
+    ref: main
+
 variables:
-  IMAGE_TAG: ${CI_PROJECT_NAME}:${CI_COMMIT_SHORT_SHA}
+  DOCKLE_PARMS: "--accept-file settings.py"
 
 stages:
+  - pre-build lint
   - build
+  - post-build lint
   - test
-
-build:
-  stage: build
-  script:
-    - docker build -t ${IMAGE_TAG} .
+  - push
 
 test:
   stage: test
+  dependencies: []
+  variables:
+    GIT_STRATEGY: none
   image: ${IMAGE_TAG}
   script:
     - anchore-cli --version
+    - ansible-lint --version
     - curl --version
     - cyclonedx-py --help
     - detect-secrets --version
