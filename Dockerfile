@@ -32,6 +32,7 @@ ENV PATH="/opt/venv/bin:$PATH"
 # hadolint ignore=DL3013
 RUN python3 -m pip install wheel --no-cache-dir
 # Install packages as specified in the requirements.txt file
+# hadolint ignore=DL3059
 RUN python3 -m pip install -r requirements.txt --no-cache-dir
 
 # Download and unzip sonar-scanner-cli
@@ -54,7 +55,7 @@ RUN git clone --depth=1 https://github.com/drwetter/testssl.sh /tmp/testssl && \
     chmod ugo+x /usr/lib/testssl/testssl.sh
 
 FROM node:current-bullseye-slim as release
-COPY --from=build /opt/venv /opt/venv
+COPY --chown=999:999 --from=build /opt/venv /opt/venv
 COPY --from=build /usr/lib/nikto/ /usr/lib/nikto/
 COPY --from=build /usr/lib/sonar-scanner/ /usr/lib/sonar-scanner/
 COPY --from=build /usr/lib/testssl/ /usr/lib/testssl/
@@ -79,10 +80,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # Update node package manager and typescript package
 # Update packages
-RUN npm install --global npm@latest typescript@latest @cyclonedx/bom@latest && \
-    npm update --global && \
-    npm cache clean --force
-
+RUN npm install --global \
+    npm@latest \
+    typescript@latest \
+    @cyclonedx/bom@latest \
+    && npm update --global \
+    && npm cache clean --force \
+    && rm -rf /root/.npm/*
 
 ENV PATH="/opt/venv/bin:$PATH"
 ENV SONAR_RUNNER_HOME=/usr/lib/sonar-scanner SONAR_USER_HOME=/tmp
@@ -91,6 +95,5 @@ ENV ANCHORE_CLI_URL=http://anchore-engine_api_1:8228/v1 ANCHORE_CLI_USER=admin A
 ENV NODE_PATH=/usr/local/lib/node_modules
 
 RUN groupadd -r tool && \
-    useradd --create-home --no-log-init --shell /bin/bash --system --gid tool --groups tool,node tool && \
-    chown -R tool:tool /opt/venv
+    useradd --create-home --no-log-init --shell /bin/bash --system --gid tool --groups tool,node tool
 USER tool
