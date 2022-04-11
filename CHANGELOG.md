@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://git.go-forward.net:7722/tooling/tools-image/compare/1.2.0...1.3.0) (2022-04-11)
+
+### Features
+
+- add ansible-lint
+  ([7730e1b](https://git.go-forward.net:7722/tooling/tools-image/commit/7730e1bf1771e49b1bb5e8091ccab9d1d4391cbe))
+
 ## [1.2.0](https://github.com/PeterMosmans/tools-image/compare/1.1.0...1.2.0) (2022-02-10)
 
 ### Features
