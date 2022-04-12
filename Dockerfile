@@ -96,4 +96,7 @@ ENV NODE_PATH=/usr/local/lib/node_modules
 
 RUN groupadd -r tool && \
     useradd --create-home --no-log-init --shell /bin/bash --system --gid tool --groups tool,node tool
+
+# Default entry point
+WORKDIR /workdir
 USER tool
