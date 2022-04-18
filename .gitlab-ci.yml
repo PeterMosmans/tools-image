@@ -26,10 +26,12 @@ test:
   script:
     - anchore-cli --version
     - ansible-lint --version
+    - black --version
     - curl --version
     - cyclonedx-py --help
     - detect-secrets --version
     - nikto.pl -Version
     - npm outdated --global
+    - pylint --version
     - sonar-scanner --version
     - trufflehog --help
