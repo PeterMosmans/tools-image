@@ -35,3 +35,4 @@ test:
     - pylint --version
     - sonar-scanner --version
     - trufflehog --help
+    - yamllint --version
