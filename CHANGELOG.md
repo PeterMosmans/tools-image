@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.4.0](https://git.go-forward.net:7722/tooling/tools-image/compare/1.3.0...1.4.0) (2022-04-19)
+
+### Features
+
+- add black and pylint
+  ([988fb2d](https://git.go-forward.net:7722/tooling/tools-image/commit/988fb2d6d54081c5bc440cfa2d490f04d220b2fb))
+- add test for yamllint
+  ([897330b](https://git.go-forward.net:7722/tooling/tools-image/commit/897330ba3885276eb2d5808f204400e534df4d06))
+- ensure owner is set directly on new files
+  ([060131e](https://git.go-forward.net:7722/tooling/tools-image/commit/060131e9391a03574181bcd6b459f2a065152775))
+- set default workdir to /workdir
+  ([2260825](https://git.go-forward.net:7722/tooling/tools-image/commit/2260825b7a0b134a8db5d03f157afbf887ec2879))
+
 ## [1.3.0](https://git.go-forward.net:7722/tooling/tools-image/compare/1.2.0...1.3.0) (2022-04-11)
 
 ### Features
