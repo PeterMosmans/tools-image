@@ -3,17 +3,14 @@ include:
   - project: tooling/pipeline
     file: docker.yml
     ref: main
-  - project: tooling/pipeline
-    file: docker_push.yml
-    ref: main
 
 variables:
   DOCKLE_PARMS: "--accept-file settings.py"
 
 stages:
-  - pre-build lint
+  - pre-build
   - build
-  - post-build lint
+  - post-build
   - test
   - push
 
