@@ -56,6 +56,9 @@ RUN git clone --depth=1 https://github.com/drwetter/testssl.sh /tmp/testssl && \
     chmod ugo+x /usr/lib/testssl/testssl.sh
 
 FROM node:current-bullseye-slim as release
+# Default entry point
+WORKDIR /workdir
+
 COPY --chown=999:999 --from=build /opt/venv /opt/venv
 COPY --from=build /usr/lib/nikto/ /usr/lib/nikto/
 COPY --from=build /usr/lib/sonar-scanner/ /usr/lib/sonar-scanner/
@@ -102,6 +105,4 @@ ENV ANCHORE_CLI_PASS=foobar \
 RUN groupadd -r tool && \
     useradd --create-home --no-log-init --shell /bin/bash --system --gid tool --groups tool,node tool
 
-# Default entry point
-WORKDIR /workdir
 USER tool
