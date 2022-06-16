@@ -30,6 +30,7 @@ The following tools are available:
 + detect-secrets
 + cyclonedx-bom
 + nikto.pl
++ nmap
 + npm
 + pylint
 + sonar-scanner

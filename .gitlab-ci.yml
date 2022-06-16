@@ -28,6 +28,7 @@ test:
     - cyclonedx-py --help
     - detect-secrets --version
     - nikto.pl -Version
+    - nmap --version
     - npm outdated --global
     - pylint --version
     - sonar-scanner --version
