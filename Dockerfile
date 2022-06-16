@@ -9,6 +9,7 @@ WORKDIR /
 COPY requirements.txt .
 
 ENV DEBIAN_FRONTEND=noninteractive
+ARG SCANNER=4.7.0.2747
 
 # Install necessary binaries
 # hadolint ignore=DL3008
@@ -36,9 +37,9 @@ RUN python3 -m pip install wheel --no-cache-dir
 RUN python3 -m pip install -r requirements.txt --no-cache-dir
 
 # Download and unzip sonar-scanner-cli
-RUN curl -sL https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-linux.zip -o /tmp/scanner.zip && \
+RUN curl -sL https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-${SCANNER}-linux.zip -o /tmp/scanner.zip && \
     unzip /tmp/scanner.zip -d /tmp/sonarscanner && \
-    mv /tmp/sonarscanner/sonar-scanner-4.6.2.2472-linux /usr/lib/sonar-scanner
+    mv /tmp/sonarscanner/sonar-scanner-${SCANNER}-linux /usr/lib/sonar-scanner
 
 # Clone nikto.pl
 RUN git clone --depth=1 https://github.com/sullo/nikto /tmp/nikto && \
