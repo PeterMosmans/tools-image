@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.5.0](https://git.go-forward.net:7722/tooling/tools-image/compare/1.4.0...1.5.0) (2022-06-16)
+
+### Features
+
+- add nmap to image
+  ([d1abbcb](https://git.go-forward.net:7722/tooling/tools-image/commit/d1abbcb070ad2a83545e190cc39056e93e5ace0e))
+- parameterize sonar-scanner-cli version
+  ([d55a9ad](https://git.go-forward.net:7722/tooling/tools-image/commit/d55a9ade64a477a8392ad159fcbf1ad0420c654d))
+- use newer npm syntax
+  ([06b4ad4](https://git.go-forward.net:7722/tooling/tools-image/commit/06b4ad49e79aaab23f58073b3b6643e7e5ba2f8f))
+
+### Bug Fixes
+
+- set workdir earlier to prevent NodeJS build issues
+  ([e30fb74](https://git.go-forward.net:7722/tooling/tools-image/commit/e30fb743bcc6ee65c773cd28e2d67a4fd5cca619))
+
 ## [1.4.0](https://git.go-forward.net:7722/tooling/tools-image/compare/1.3.0...1.4.0) (2022-04-19)
 
 ### Features
