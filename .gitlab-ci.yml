@@ -97,6 +97,7 @@ test:
   stage: deploy
   variables:
     GIT_STRATEGY: none
+  dependencies: []
   rules:
     - if: '$REGISTRY_PASSWORD == null'
       when: never
