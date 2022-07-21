@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.0](https://git.go-forward.net:7722/tooling/tools-image/compare/1.5.0...1.6.0) (2022-07-21)
+
+### Features
+
+- add several new automated security scans
+  ([990d9a6](https://git.go-forward.net:7722/tooling/tools-image/commit/990d9a63212b95b2a636687c772bad93affcd430))
+
 ## [1.5.0](https://git.go-forward.net:7722/tooling/tools-image/compare/1.4.0...1.5.0) (2022-06-16)
 
 ### Features
