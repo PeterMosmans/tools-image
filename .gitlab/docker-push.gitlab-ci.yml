@@ -1,0 +1,38 @@
+---
+# Job template - to be used in a pipeline by including this file.
+# Make sure to include the .deploy stage in the pipeline template.
+#
+# Tags and pushes a Docker image, when tagged and/or on the default branch
+#
+# include:
+#  - .gitlab/docker-lint.gitlab-ci.yml
+
+tag_latest:
+  extends: .deploy
+  script:
+    - docker tag ${IMAGE_TAG} ${IMAGE_REPOSITORY}:latest
+  rules:
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+
+tag_image:
+  extends: .deploy
+  script:
+    - docker tag ${IMAGE_TAG} ${IMAGE_REPOSITORY}:$CI_COMMIT_TAG
+  rules:
+    - if: $CI_COMMIT_TAG
+
+push:
+  extends: .deploy
+  script:
+    - echo "$REGISTRY_PASSWORD" | docker login -u "$REGISTRY_USER" --password-stdin
+    - docker push ${IMAGE_REPOSITORY}:latest
+  rules:
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+
+push_tags:
+  extends: .deploy
+  script:
+    - echo "$REGISTRY_PASSWORD" | docker login -u "$REGISTRY_USER" --password-stdin
+    - docker push ${IMAGE_REPOSITORY}:$CI_COMMIT_TAG
+  rules:
+    - if: $CI_COMMIT_TAG
