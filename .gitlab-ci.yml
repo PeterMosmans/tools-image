@@ -121,6 +121,8 @@ push:
   script:
     - echo "$REGISTRY_PASSWORD" | docker login -u "$REGISTRY_USER" --password-stdin
     - docker push ${IMAGE_REPOSITORY}:latest
+  rules:
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
 
 push_tags:
   extends: .deploy
