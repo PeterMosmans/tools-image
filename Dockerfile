@@ -76,6 +76,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     git \
     jq \
     libnet-ssleay-perl \
+    make \
     nmap \
     procps \
     python3 \
