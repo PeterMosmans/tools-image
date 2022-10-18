@@ -12,6 +12,7 @@ include:
       - dive.gitlab-ci.yml
       - dockle.gitlab-ci.yml
       - dependency-check.gitlab-ci.yml
+      - test.gitlab-ci.yml
 
 variables:
   DOCKLE_PARMS: "--accept-file settings.py --accept-key ANCHORE_CLI_PASS"
@@ -41,10 +42,3 @@ stages:
     - build
   variables:
     GIT_STRATEGY: none
-
-test_image:
-  stage: test
-  needs:
-    - build
-  script:
-    - make test
