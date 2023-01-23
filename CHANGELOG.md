@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.7.0](https://github.com/PeterMosmans//compare/1.6.0...1.7.0) (2023-01-23)
+
+### Features
+
+- add jwt_tool 986d6a6
+- push latest tag on any build d0c14f3
+- refactor test stage 40f67e7
+
 ## [1.6.0](https://git.go-forward.net:7722/tooling/tools-image/compare/1.5.0...1.6.0) (2022-07-21)
 
 ### Features
