@@ -15,7 +15,7 @@ DOCKER_IMG := gofwd/$(NAME):$(TAG)
 # Build image
 image:
 	@echo "Building $(DOCKER_IMG)..." && \
-	docker build . -t $(DOCKER_IMG)
+	DOCKER_BUILDKIT=1 docker build . -t $(DOCKER_IMG)
 
 test:
 	anchore-cli --version && \
@@ -24,6 +24,7 @@ test:
     	curl --version && \
     	cyclonedx-py --help && \
     	detect-secrets --version && \
+	jwt_tool.py -h && \
     	nikto.pl -Version && \
     	nmap --version && \
     	npm outdated --global && \

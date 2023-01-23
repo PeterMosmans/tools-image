@@ -41,6 +41,13 @@ RUN curl -sL https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/son
     unzip /tmp/scanner.zip -d /tmp/sonarscanner && \
     mv /tmp/sonarscanner/sonar-scanner-${SCANNER}-linux /usr/lib/sonar-scanner
 
+# Clone jwt_tool
+RUN git clone --depth=1 https://github.com/ticarpi/jwt_tool /tmp/jwt_tool && \
+    rm -rf /tmp/jwt_tool/.git && \
+    rm -rf /tmp/jwt_tool/.github && \
+    mv /tmp/jwt_tool /usr/lib/jwt_tool && \
+    chmod ugo+x /usr/lib/jwt_tool/jwt_tool.py
+
 # Clone nikto.pl
 RUN git clone --depth=1 https://github.com/sullo/nikto /tmp/nikto && \
     rm -rf /tmp/nikto/program/.git && \
@@ -60,10 +67,12 @@ FROM node:current-bullseye-slim as release
 WORKDIR /workdir
 
 COPY --chown=999:999 --from=build /opt/venv /opt/venv
+COPY --from=build /usr/lib/jwt_tool/ /usr/lib/jwt_tool/
 COPY --from=build /usr/lib/nikto/ /usr/lib/nikto/
 COPY --from=build /usr/lib/sonar-scanner/ /usr/lib/sonar-scanner/
 COPY --from=build /usr/lib/testssl/ /usr/lib/testssl/
-RUN ln -s /usr/lib/nikto/nikto.pl /usr/local/bin/nikto.pl && \
+RUN ln -s /usr/lib/jwt_tool/jwt_tool.py /usr/local/bin/jwt_tool.py && \
+    ln -s /usr/lib/nikto/nikto.pl /usr/local/bin/nikto.pl && \
     ln -s /usr/lib/sonar-scanner/bin/sonar-scanner /usr/local/bin/sonar-scanner && \
     ln -s /usr/lib/testssl/testssl.sh /usr/local/bin/testssl.sh
 
@@ -107,3 +116,6 @@ RUN groupadd -r tool && \
     useradd --create-home --no-log-init --shell /bin/bash --system --gid tool --groups tool,node tool
 
 USER tool
+
+# Create first-time configuration automatically
+RUN /usr/lib/jwt_tool/jwt_tool.py || true

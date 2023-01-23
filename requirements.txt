@@ -1,8 +1,12 @@
 anchorecli
 ansible-lint
 black
+cprint
 cyclonedx-bom
 detect-secrets
+pycryptodomex
 pylint
+requests
+termcolor
 trufflehog
 yamllint
