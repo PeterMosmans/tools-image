@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.7.0](https://github.com/PeterMosmans//compare/1.6.0...1.7.0) (2023-01-23)
+## [1.7.0](https://github.com/PeterMosmans/tools-image/compare/1.6.0...1.7.0) (2023-01-23)
 
 ### Features
 
@@ -8,48 +8,48 @@
 - push latest tag on any build d0c14f3
 - refactor test stage 40f67e7
 
-## [1.6.0](https://git.go-forward.net:7722/tooling/tools-image/compare/1.5.0...1.6.0) (2022-07-21)
+## [1.6.0](https://github.com/PeterMosmans/tools-image/compare/1.5.0...1.6.0) (2022-07-21)
 
 ### Features
 
 - add several new automated security scans
-  ([990d9a6](https://git.go-forward.net:7722/tooling/tools-image/commit/990d9a63212b95b2a636687c772bad93affcd430))
+  ([990d9a6](https://github.com/PeterMosmans/tools-image/commit/990d9a63212b95b2a636687c772bad93affcd430))
 
-## [1.5.0](https://git.go-forward.net:7722/tooling/tools-image/compare/1.4.0...1.5.0) (2022-06-16)
+## [1.5.0](https://github.com/PeterMosmans/tools-image/compare/1.4.0...1.5.0) (2022-06-16)
 
 ### Features
 
 - add nmap to image
-  ([d1abbcb](https://git.go-forward.net:7722/tooling/tools-image/commit/d1abbcb070ad2a83545e190cc39056e93e5ace0e))
+  ([d1abbcb](https://github.com/PeterMosmans/tools-image/commit/d1abbcb070ad2a83545e190cc39056e93e5ace0e))
 - parameterize sonar-scanner-cli version
-  ([d55a9ad](https://git.go-forward.net:7722/tooling/tools-image/commit/d55a9ade64a477a8392ad159fcbf1ad0420c654d))
+  ([d55a9ad](https://github.com/PeterMosmans/tools-image/commit/d55a9ade64a477a8392ad159fcbf1ad0420c654d))
 - use newer npm syntax
-  ([06b4ad4](https://git.go-forward.net:7722/tooling/tools-image/commit/06b4ad49e79aaab23f58073b3b6643e7e5ba2f8f))
+  ([06b4ad4](https://github.com/PeterMosmans/tools-image/commit/06b4ad49e79aaab23f58073b3b6643e7e5ba2f8f))
 
 ### Bug Fixes
 
 - set workdir earlier to prevent NodeJS build issues
-  ([e30fb74](https://git.go-forward.net:7722/tooling/tools-image/commit/e30fb743bcc6ee65c773cd28e2d67a4fd5cca619))
+  ([e30fb74](https://github.com/PeterMosmans/tools-image/commit/e30fb743bcc6ee65c773cd28e2d67a4fd5cca619))
 
-## [1.4.0](https://git.go-forward.net:7722/tooling/tools-image/compare/1.3.0...1.4.0) (2022-04-19)
+## [1.4.0](https://github.com/PeterMosmans/tools-image/compare/1.3.0...1.4.0) (2022-04-19)
 
 ### Features
 
 - add black and pylint
-  ([988fb2d](https://git.go-forward.net:7722/tooling/tools-image/commit/988fb2d6d54081c5bc440cfa2d490f04d220b2fb))
+  ([988fb2d](https://github.com/PeterMosmans/tools-image/commit/988fb2d6d54081c5bc440cfa2d490f04d220b2fb))
 - add test for yamllint
-  ([897330b](https://git.go-forward.net:7722/tooling/tools-image/commit/897330ba3885276eb2d5808f204400e534df4d06))
+  ([897330b](https://github.com/PeterMosmans/tools-image/commit/897330ba3885276eb2d5808f204400e534df4d06))
 - ensure owner is set directly on new files
-  ([060131e](https://git.go-forward.net:7722/tooling/tools-image/commit/060131e9391a03574181bcd6b459f2a065152775))
+  ([060131e](https://github.com/PeterMosmans/tools-image/commit/060131e9391a03574181bcd6b459f2a065152775))
 - set default workdir to /workdir
-  ([2260825](https://git.go-forward.net:7722/tooling/tools-image/commit/2260825b7a0b134a8db5d03f157afbf887ec2879))
+  ([2260825](https://github.com/PeterMosmans/tools-image/commit/2260825b7a0b134a8db5d03f157afbf887ec2879))
 
-## [1.3.0](https://git.go-forward.net:7722/tooling/tools-image/compare/1.2.0...1.3.0) (2022-04-11)
+## [1.3.0](https://github.com/PeterMosmans/tools-image/compare/1.2.0...1.3.0) (2022-04-11)
 
 ### Features
 
 - add ansible-lint
-  ([7730e1b](https://git.go-forward.net:7722/tooling/tools-image/commit/7730e1bf1771e49b1bb5e8091ccab9d1d4391cbe))
+  ([7730e1b](https://github.com/PeterMosmans/tools-image/commit/7730e1bf1771e49b1bb5e8091ccab9d1d4391cbe))
 
 ## [1.2.0](https://github.com/PeterMosmans/tools-image/compare/1.1.0...1.2.0) (2022-02-10)
 
