@@ -10,6 +10,7 @@ COPY requirements.txt .
 
 ENV DEBIAN_FRONTEND=noninteractive
 ARG GRYPE=v0.74.1 \
+    JWT_TOOL=v2.2.6 \
     SCANNER=5.0.1.3006
 
 # Install necessary binaries
@@ -39,14 +40,15 @@ RUN python3 -m pip install -r requirements.txt --no-cache-dir && \
     cyclonedx-py -r --format json --output /opt/venv/sbom.json
 
 # Download and unzip sonar-scanner-cli
-RUN curl -sL https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-${SCANNER}-linux.zip -o /tmp/scanner.zip && \
+RUN curl -sL "https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-${SCANNER}-linux.zip" -o /tmp/scanner.zip && \
     unzip /tmp/scanner.zip -d /tmp/sonarscanner && \
-    mv /tmp/sonarscanner/sonar-scanner-${SCANNER}-linux /usr/lib/sonar-scanner
+    mv "/tmp/sonarscanner/sonar-scanner-${SCANNER}-linux" /usr/lib/sonar-scanner
 
 # Clone jwt_tool
-RUN git clone --depth=1 https://github.com/ticarpi/jwt_tool /tmp/jwt_tool && \
+RUN git clone --depth=1 --branch ${JWT_TOOL} https://github.com/ticarpi/jwt_tool /tmp/jwt_tool && \
     rm -rf /tmp/jwt_tool/.git && \
     rm -rf /tmp/jwt_tool/.github && \
+    rm -f /tmp/Dockerfile && \
     mv /tmp/jwt_tool /usr/lib/jwt_tool && \
     chmod ugo+x /usr/lib/jwt_tool/jwt_tool.py
 
