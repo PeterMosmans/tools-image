@@ -5,13 +5,10 @@ several security-related tools. The tools can then easily be used in a
 Continuous Integration pipeline, by using this image.
 
 Some of the tools are binaries (for example the SonarQube scanner), some are
-Python libraries.
-
-The accompanying `Jenkinsfile` can be used to automatically build, test and push
-the image using the build and automation server Jenkins.
+Python libraries, and some are Node packages.
 
 The accompanying `.gitlab-ci.yml` file can be used to automatically test the
-image.
+image, using several automated security testing tools.
 
 A prebuilt Docker image can be found on
 <https://hub.docker.com/repository/docker/gofwd/tools-image> and downloaded from
