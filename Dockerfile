@@ -32,13 +32,11 @@ ENV PATH="/opt/venv/bin:$PATH"
 
 # Install the latest version of wheel first, as that is not installed by default
 # hadolint ignore=DL3013
-RUN python3 -m pip install wheel --no-cache-dir
+# RUN python3 -m pip install wheel --no-cache-dir
 # Install packages as specified in the requirements.txt file
 # hadolint ignore=DL3059
 RUN python3 -m pip install -r requirements.txt --no-cache-dir && \
-    pip3 install cyclonedx-bom --no-cache-dir && \
-    cyclonedx-py -r --format json --output /opt/venv/sbom.json && \
-    pip3 uninstall --yes cyclonedx-py
+    cyclonedx-py -r --format json --output /opt/venv/sbom.json
 
 # Download and unzip sonar-scanner-cli
 RUN curl -sL https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-${SCANNER}-linux.zip -o /tmp/scanner.zip && \
