@@ -112,10 +112,7 @@ RUN npm install --location=global \
     && npm cache clean --force \
     && rm -rf /root/.npm/*
 
-ENV ANCHORE_CLI_PASS=foobar \
-    ANCHORE_CLI_URL=http://anchore-engine_api_1:8228/v1 \
-    ANCHORE_CLI_USER=admin \
-    LC_ALL=C.UTF-8 \
+ENV LC_ALL=C.UTF-8 \
     NODE_PATH=/usr/local/lib/node_modules \
     PATH="/opt/venv/bin:$PATH" \
     SONAR_RUNNER_HOME=/usr/lib/sonar-scanner \

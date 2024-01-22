@@ -18,9 +18,7 @@ image:
 	DOCKER_BUILDKIT=1 docker build . -t $(DOCKER_IMG)
 
 test:
-	anchore-cli --version && \
 	ansible-lint --version && \
-	black --version && \
 	curl --version && \
 	cyclonedx-py --help && \
 	detect-secrets --version && \

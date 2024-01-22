@@ -22,9 +22,7 @@ docker.io using the tag ``gofwd/tools-image``
 
 The following tools are available:
 
-+ anchore-cli
 + ansible-lint
-+ black
 + curl
 + cyclonedx-bom
 + detect-secrets
