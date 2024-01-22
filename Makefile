@@ -31,5 +31,6 @@ test:
 	npm outdated --global && \
 	pylint --version && \
 	sonar-scanner --version && \
+	ssh-audit --help && \
 	trufflehog --help && \
 	yamllint --version

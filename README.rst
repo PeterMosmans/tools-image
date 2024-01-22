@@ -34,6 +34,7 @@ The following tools are available:
 + npm
 + pylint
 + sonar-scanner
++ ssh-audit
 + testssl.sh
 + trufflehog
 + yamllint
