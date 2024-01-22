@@ -1,11 +1,10 @@
 ---
 # Job template - to be used in a pipeline by including this file.
-# Make sure to include the .validate stage in the pipeline template
 #
-# Lints a Dockerfile
+# Lints a Dockerfile using hadolint.
 #
-# include:
-#  - .gitlab/dockerfile-lint.gitlab-ci.yml
+# Variables:
+# HADOLINT_VERSION Specifies which version of hadolint/hadolint is being used
 
 lint_dockerfile:
   extends: .sast
@@ -14,7 +13,7 @@ lint_dockerfile:
     GIT_DEPTH: 1
     GIT_STRATEGY: fetch
   image:
-    name: hadolint/hadolint:v2.10.0-debian
+    name: hadolint/hadolint:${HADOLINT_VERSION}
   script:
     - mkdir -p reports || true
     - hadolint Dockerfile | tee reports/hadolint-report.txt

@@ -12,7 +12,7 @@ tag_latest:
   script:
     - docker tag ${IMAGE_TAG} ${IMAGE_REPOSITORY}:latest
   rules:
-    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+    - if: "$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH"
 
 tag_image:
   extends: .deploy
@@ -27,7 +27,7 @@ push:
     - echo "$REGISTRY_PASSWORD" | docker login -u "$REGISTRY_USER" --password-stdin
     - docker push ${IMAGE_REPOSITORY}:latest
   rules:
-    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+    - if: "$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH"
 
 push_tags:
   extends: .deploy

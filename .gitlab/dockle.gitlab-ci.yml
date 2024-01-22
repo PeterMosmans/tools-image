@@ -1,0 +1,27 @@
+---
+# Job template - to be used in a pipeline by including this file.
+#
+# Lints a Docker image using Dockle.
+#
+# Variables:
+# DOCKLE_PARMS   Dockle configuration parameters, e.g., "--ignore CIS-DI-0001"
+# DOCKLE_VERSION Specifies which version of goodwithtech/dockle is being used
+# IMAGE_TAR      Name of the Docker image in tar format
+
+dockle:
+  extends: .security
+  dependencies:
+    - build
+  image:
+    name: goodwithtech/dockle:${DOCKLE_VERSION}
+    entrypoint: [""]
+  script:
+    - mkdir -p reports || true
+    - >
+      dockle --input ${IMAGE_TAR} ${DOCKLE_PARMS} --exit-code 1 |
+      tee reports/dockle-report.txt
+  artifacts:
+    when: always
+    paths:
+      - reports/dockle-report.txt
+

@@ -1,0 +1,19 @@
+---
+# Job template - to be used in a pipeline by including this file.
+#
+# Analyzes a Docker image using Grype.
+#
+# Variables:
+# IMAGE_TAR     Name of the Docker image (in tar format)
+# TOOLS_VERSION Specifies which version of gofwd/tools-image is being used
+
+grype:
+  extends: .security
+  image: gofwd/tools-image:$TOOLS_VERSION
+  script:
+    - mkdir -p reports 1>/dev/null || true
+    - grype docker-archive:${IMAGE_TAR} --fail-on medium | tee reports/grype-report.txt
+  artifacts:
+    paths:
+      - reports/grype-report.txt
+    when: always
