@@ -1,6 +1,7 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
 # Use a base image to build (and download) the tools on
 
-FROM node:current-bullseye-slim as build
+FROM node:21-bookworm-slim as build
 
 LABEL maintainer="support@go-forward.net"
 LABEL vendor="Go Forward"
@@ -69,7 +70,7 @@ RUN git clone --depth=1 --branch "${TESTSSL}" https://github.com/drwetter/testss
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | sh -s -- -b /usr/local/bin "${GRYPE}"
 
-FROM node:current-bullseye-slim as release
+FROM node:21-bookworm-slim as release
 # Default entry point
 WORKDIR /workdir
 
