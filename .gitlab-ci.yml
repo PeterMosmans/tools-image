@@ -13,8 +13,6 @@ variables:
 
   # Tool-specific: The directory where configuration files can be found
   CONFIGURATION: automated_security_tests
-  # Don't mind the container being run as root
-  DOCKLE_PARMS: "--ignore CIS-DI-0001"
 
   # Generic information
   DOCKER_DRIVER: overlay2
