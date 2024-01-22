@@ -14,6 +14,7 @@
 
 dependency-check:
   variables:
+    GIT_DEPTH: 1
     GIT_STRATEGY: fetch
     DEPENDENCY_SUPPRESSION: "$CONFIGURATION/dependency-check-suppression.xml"
   extends: .security
