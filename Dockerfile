@@ -12,7 +12,8 @@ ENV DEBIAN_FRONTEND=noninteractive
 ARG GRYPE=v0.74.1 \
     JWT_TOOL=v2.2.6 \
     NIKTO=2.5.0 \
-    SCANNER=5.0.1.3006
+    SCANNER=5.0.1.3006 \
+    TESTSSL=v3.2rc3
 
 # Install necessary binaries
 # hadolint ignore=DL3008
@@ -46,7 +47,7 @@ RUN curl -sL "https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/so
     mv "/tmp/sonarscanner/sonar-scanner-${SCANNER}-linux" /usr/lib/sonar-scanner
 
 # Clone jwt_tool
-RUN git clone --depth=1 --branch ${JWT_TOOL} https://github.com/ticarpi/jwt_tool /tmp/jwt_tool && \
+RUN git clone --depth=1 --branch "${JWT_TOOL}" https://github.com/ticarpi/jwt_tool /tmp/jwt_tool && \
     rm -rf /tmp/jwt_tool/.git && \
     rm -rf /tmp/jwt_tool/.github && \
     rm -f /tmp/Dockerfile && \
@@ -54,12 +55,12 @@ RUN git clone --depth=1 --branch ${JWT_TOOL} https://github.com/ticarpi/jwt_tool
     chmod ugo+x /usr/lib/jwt_tool/jwt_tool.py
 
 # Clone nikto.pl
-RUN git clone --depth=1 --branch ${NIKTO} https://github.com/sullo/nikto /tmp/nikto && \
+RUN git clone --depth=1 --branch "${NIKTO}" https://github.com/sullo/nikto /tmp/nikto && \
     rm -rf /tmp/nikto/program/.git && \
     mv /tmp/nikto/program /usr/lib/nikto
 
 # Clone testssl.sh
-RUN git clone --depth=1 https://github.com/drwetter/testssl.sh /tmp/testssl && \
+RUN git clone --depth=1 --branch "${TESTSSL}" https://github.com/drwetter/testssl.sh /tmp/testssl && \
     mkdir /usr/lib/testssl && \
     mv /tmp/testssl/bin/openssl.Linux.x86_64 /usr/lib/testssl/openssl && \
     chmod ugo+x /usr/lib/testssl/openssl && \
