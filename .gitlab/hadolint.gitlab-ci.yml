@@ -6,7 +6,7 @@
 # Variables:
 # HADOLINT_VERSION Specifies which version of hadolint/hadolint is being used
 
-lint_dockerfile:
+hadolint:
   extends: .sast
   dependencies: []
   variables:
