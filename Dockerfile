@@ -10,7 +10,7 @@ COPY requirements.txt .
 
 ENV DEBIAN_FRONTEND=noninteractive
 ARG GRYPE=v0.74.1 \
-    SCANNER=4.7.0.2747
+    SCANNER=5.0.1.3006
 
 # Install necessary binaries
 # hadolint ignore=DL3008
