@@ -13,7 +13,7 @@ build:
     - DOCKER_BUILDKIT=1 docker build -t ${IMAGE_TAG} .
     - docker save ${IMAGE_TAG} > ${IMAGE_TAR}
     - temp_container=$(docker create ${IMAGE_TAG})
-    - docker cp "$temp_container:/opt/venv/cyclonedx.json" cyclonedx.json
+    - docker cp "$temp_container:/opt/venv/sbom.json" sbom.json
     - docker rm "$temp_container"
   artifacts:
     expire_in: 1 week
@@ -21,4 +21,4 @@ build:
     when: always
     paths:
       - ${IMAGE_TAR}
-      - cyclonedx.json
+      - sbom.json
