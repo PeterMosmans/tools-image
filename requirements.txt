@@ -7,6 +7,4 @@ pylint==3.0.3
 requests==2.31.0
 ssh-audit==3.1.0
 termcolor==2.4.0
-trufflehog==2.2.1
 yamllint==1.33.0
-g

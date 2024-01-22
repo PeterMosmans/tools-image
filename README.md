@@ -28,5 +28,4 @@ The following tools are available:
 - sonar-scanner
 - ssh-audit
 - testssl.sh
-- trufflehog
 - yamllint
