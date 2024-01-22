@@ -48,7 +48,7 @@ RUN curl -sL "https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/so
 RUN git clone --depth=1 --branch "${JWT_TOOL}" https://github.com/ticarpi/jwt_tool /tmp/jwt_tool && \
     rm -rf /tmp/jwt_tool/.git && \
     rm -rf /tmp/jwt_tool/.github && \
-    rm -f /tmp/Dockerfile && \
+    rm -f /tmp/jwt_tool/Dockerfile && \
     mv /tmp/jwt_tool /usr/lib/jwt_tool && \
     chmod ugo+x /usr/lib/jwt_tool/jwt_tool.py
 
