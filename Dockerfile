@@ -9,7 +9,8 @@ WORKDIR /
 COPY requirements.txt .
 
 ENV DEBIAN_FRONTEND=noninteractive
-ARG SCANNER=4.7.0.2747
+ARG GRYPE=v0.74.1 \
+    SCANNER=4.7.0.2747
 
 # Install necessary binaries
 # hadolint ignore=DL3008
@@ -65,6 +66,10 @@ RUN git clone --depth=1 https://github.com/drwetter/testssl.sh /tmp/testssl && \
     mv /tmp/testssl/testssl.sh /usr/lib/testssl/testssl.sh && \
     chmod ugo+x /usr/lib/testssl/testssl.sh
 
+# Install Grype
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+RUN curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | sh -s -- -b /usr/local/bin "${GRYPE}"
+
 FROM node:current-bullseye-slim as release
 # Default entry point
 WORKDIR /workdir
@@ -74,6 +79,7 @@ COPY --from=build /usr/lib/jwt_tool/ /usr/lib/jwt_tool/
 COPY --from=build /usr/lib/nikto/ /usr/lib/nikto/
 COPY --from=build /usr/lib/sonar-scanner/ /usr/lib/sonar-scanner/
 COPY --from=build /usr/lib/testssl/ /usr/lib/testssl/
+COPY --from=build /usr/local/bin/grype /usr/local/bin/grype
 RUN ln -s /usr/lib/jwt_tool/jwt_tool.py /usr/local/bin/jwt_tool.py && \
     ln -s /usr/lib/nikto/nikto.pl /usr/local/bin/nikto.pl && \
     ln -s /usr/lib/sonar-scanner/bin/sonar-scanner /usr/local/bin/sonar-scanner && \

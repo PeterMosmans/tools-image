@@ -1,6 +1,6 @@
 # Generic Makefile for Docker images
 
-# Copyright (C) 2018-2022 Peter Mosmans [Go Forward]
+# Copyright (C) 2018-2024 Peter Mosmans [Go Forward]
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 # TAG	!= git tag|tail -1
@@ -19,16 +19,17 @@ image:
 
 test:
 	anchore-cli --version && \
-    	ansible-lint --version && \
-    	black --version && \
-    	curl --version && \
-    	cyclonedx-py --help && \
-    	detect-secrets --version && \
+	ansible-lint --version && \
+	black --version && \
+	curl --version && \
+	cyclonedx-py --help && \
+	detect-secrets --version && \
+	grype --version
 	jwt_tool.py -h && \
-    	nikto.pl -Version && \
-    	nmap --version && \
-    	npm outdated --global && \
-    	pylint --version && \
-    	sonar-scanner --version && \
-    	trufflehog --help && \
-    	yamllint --version
+	nikto.pl -Version && \
+	nmap --version && \
+	npm outdated --global && \
+	pylint --version && \
+	sonar-scanner --version && \
+	trufflehog --help && \
+	yamllint --version

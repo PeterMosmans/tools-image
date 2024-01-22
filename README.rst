@@ -12,9 +12,8 @@ Python libraries.
 The accompanying ``Jenkinsfile`` can be used to automatically build, test and
 push the image using the build and automation server Jenkins.
 
-The accompanying ``.gitlab-ci`` file can be used to automatically test the image
-(some parts of the pipeline are not included yet, as they are part of reusable
-GitLab CI templates).
+The accompanying ``.gitlab-ci.yml`` file can be used to automatically test the
+image.
 
 A prebuilt Docker image can be found on
 https://hub.docker.com/repository/docker/gofwd/tools-image and downloaded from
@@ -27,8 +26,9 @@ The following tools are available:
 + ansible-lint
 + black
 + curl
-+ detect-secrets
 + cyclonedx-bom
++ detect-secrets
++ grype
 + nikto.pl
 + nmap
 + npm
