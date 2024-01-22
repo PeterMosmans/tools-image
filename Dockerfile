@@ -11,6 +11,7 @@ COPY requirements.txt .
 ENV DEBIAN_FRONTEND=noninteractive
 ARG GRYPE=v0.74.1 \
     JWT_TOOL=v2.2.6 \
+    NIKTO=2.5.0 \
     SCANNER=5.0.1.3006
 
 # Install necessary binaries
@@ -53,7 +54,7 @@ RUN git clone --depth=1 --branch ${JWT_TOOL} https://github.com/ticarpi/jwt_tool
     chmod ugo+x /usr/lib/jwt_tool/jwt_tool.py
 
 # Clone nikto.pl
-RUN git clone --depth=1 https://github.com/sullo/nikto /tmp/nikto && \
+RUN git clone --depth=1 --branch ${NIKTO} https://github.com/sullo/nikto /tmp/nikto && \
     rm -rf /tmp/nikto/program/.git && \
     mv /tmp/nikto/program /usr/lib/nikto
 
