@@ -1,0 +1,4 @@
+# Allow "suspicious filenames"
+CIS-DI-0010
+# Health check is not necessary for a tools image
+CIS-DI-0006

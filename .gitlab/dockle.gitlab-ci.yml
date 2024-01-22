@@ -4,11 +4,15 @@
 # Lints a Docker image using Dockle.
 #
 # Variables:
-# DOCKLE_PARMS   Dockle configuration parameters, e.g., "--ignore CIS-DI-0001"
-# DOCKLE_VERSION Specifies which version of goodwithtech/dockle is being used
-# IMAGE_TAR      Name of the Docker image in tar format
+# CONFIGURATION      Directory where .dockleignore can be found
+# DOCKLE_VERSION     Specifies which version of goodwithtech/dockle is being used
+# IMAGE_TAR          Name of the Docker image in tar format
 
 dockle:
+  variables:
+    # We might want to read the .dockleignore file in the root directory
+    GIT_DEPTH: 1
+    GIT_STRATEGY: fetch
   extends: .security
   dependencies:
     - build
@@ -18,8 +22,14 @@ dockle:
   script:
     - mkdir -p reports || true
     - >
-      dockle --input ${IMAGE_TAR} ${DOCKLE_PARMS} --exit-code 1 |
-      tee reports/dockle-report.txt
+      if [[ -d "$CONFIGURATION" ]]; then
+      cd "${CONFIGURATION}" ;
+      dockle --input ../${IMAGE_TAR} --exit-code 1 |
+      tee ../reports/dockle-report.txt ;
+      else
+      dockle --input ${IMAGE_TAR} --exit-code 1 |
+      tee reports/dockle-report.txt ;
+      fi
   artifacts:
     when: always
     paths:
