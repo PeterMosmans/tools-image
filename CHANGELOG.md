@@ -1,5 +1,42 @@
 # Changelog
 
+## [1.8.0](https://github.com/PeterMosmans/tools-image/compare/1.7.0...1.8.0) (2024-01-23)
+
+
+### Features
+
+* add and use Grype HTML template ([bbcee76](https://github.com/PeterMosmans/tools-image/-/commit/bbcee76378843020181960b7b65bd37314aa2bfb))
+* add gitignore file ([ad73838](https://github.com/PeterMosmans/tools-image/-/commit/ad738382f7e3365e31eb2ae8389e1bb36d55e0d9))
+* add Grype ([e32f01d](https://github.com/PeterMosmans/tools-image/-/commit/e32f01d078c6016fef01494ef5b53e72bb9ac2db))
+* add ssh-audit ([fe8018e](https://github.com/PeterMosmans/tools-image/-/commit/fe8018e0034aa3aceeb904e9c2aa4e6c18df5898))
+* create an SBOM during the Docker build process ([106584b](https://github.com/PeterMosmans/tools-image/-/commit/106584b8255b6090f71593c80849b151418c1e85))
+* create multiple reports with Grype ([9624c27](https://github.com/PeterMosmans/tools-image/-/commit/9624c272b18f073e5bfe2427fd01b75ce2b7f96d))
+* do a shallow fetch for Dependency-Check configuration file ([99bae94](https://github.com/PeterMosmans/tools-image/-/commit/99bae9431d91f8ac79f2e602146fb8112456ebb5))
+* ensure that Hadolint can read a settings file ([8c2f4eb](https://github.com/PeterMosmans/tools-image/-/commit/8c2f4eb14e4df11b3cc099ea45cb5a55d36cd385))
+* execute Dockle in directory with configuration file ([a90d993](https://github.com/PeterMosmans/tools-image/-/commit/a90d9939fff403f15d68488a6e9a4ae02457ab61))
+* improve and upgrade automated security tests ([3b8c293](https://github.com/PeterMosmans/tools-image/-/commit/3b8c293d06b94a24a6e4ebdeb04b18c3ff2794af))
+* improve Docker build process ([229dc12](https://github.com/PeterMosmans/tools-image/-/commit/229dc12125da27183b8de2ba56110c9f33113394))
+* make SonarQube dependent on hadolint and grype ([4eaf6da](https://github.com/PeterMosmans/tools-image/-/commit/4eaf6da961884e77d33905aec41197893583c192))
+* pin and parameterize jwt_tool ([e7409eb](https://github.com/PeterMosmans/tools-image/-/commit/e7409ebf395751f180a1bdc3a48b47a254e604a8))
+* pin and parameterize Nikto ([c6c8af0](https://github.com/PeterMosmans/tools-image/-/commit/c6c8af0711f40311eed04ac8192449ee8d90523f))
+* pin and parameterize testssl.sh ([effea30](https://github.com/PeterMosmans/tools-image/-/commit/effea30305ec2735b96dfd3b27985d174230fdda))
+* pin versions ([186b92b](https://github.com/PeterMosmans/tools-image/-/commit/186b92b4f014e9e796952cd5c88aac7b363e3701))
+* remove anchore-cli and black ([92865c7](https://github.com/PeterMosmans/tools-image/-/commit/92865c73f56ff1a4dba743768c1c3a98ba21334c))
+* remove truffleHog as its Python library is very outdated ([78ee471](https://github.com/PeterMosmans/tools-image/-/commit/78ee471244352ef11ba2757780f07a7f8d765b02))
+* remove unused vars as all tools now use configuration files ([43afaad](https://github.com/PeterMosmans/tools-image/-/commit/43afaad5b573d11359b16a5893ed29b2c0e03445))
+* update Debian of Docker base image ([a72d3c5](https://github.com/PeterMosmans/tools-image/-/commit/a72d3c599ab9701d882fa233694d133c6dfe2e7f))
+* update Sonarscanner CLI ([f13e614](https://github.com/PeterMosmans/tools-image/-/commit/f13e614036258d9877b6a532e73175b0168414ca))
+* upload Grype and Hadolint reports with SonarQube ([533322b](https://github.com/PeterMosmans/tools-image/-/commit/533322be585d6b5688b700a0cfb9e32082e8fc76))
+* use vars for automated security testing configuration files ([a4ee529](https://github.com/PeterMosmans/tools-image/-/commit/a4ee529eb529a5ae2ac44334cbce0b3323dda93b))
+
+
+### Bug Fixes
+
+* clean up correct jwt_tool directory ([3d01208](https://github.com/PeterMosmans/tools-image/-/commit/3d01208470bbe2607019e216c87728a20dae6740))
+* ensure CHANGELOG links work ([f150ee1](https://github.com/PeterMosmans/tools-image/-/commit/f150ee1eac749e8176d248a55920af29fe9fbb69))
+* ensure cyclonedx remains installed ([6c9475b](https://github.com/PeterMosmans/tools-image/-/commit/6c9475bb9281737e94dfdd3894242a033a15d142))
+* use correct name for job ([df4062d](https://github.com/PeterMosmans/tools-image/-/commit/df4062d15732bb519bafbe77bd12f763244bc5fd))
+
 ## [1.7.0](https://github.com/PeterMosmans/tools-image/compare/1.6.0...1.7.0) (2023-01-23)
 
 ### Features
