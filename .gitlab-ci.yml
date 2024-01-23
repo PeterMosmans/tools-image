@@ -75,9 +75,6 @@ stages:
   stage: build
   needs:
     - detect-secrets
-  variables:
-    GIT_DEPTH: 1
-    GIT_STRATEGY: fetch
 
 .dast:
   stage: dast
