@@ -9,7 +9,7 @@ variables:
   DOCKLE_VERSION: v0.4.13
   HADOLINT_VERSION: v2.12.0-debian
   TOOLS_VERSION: 1.8.0
-  DEPENDENCY_VERSION: 9.0.8
+  DEPENDENCY_VERSION: 9.0.9
 
   # Tool-specific: The directory where configuration files can be found
   CONFIGURATION: automated_security_tests

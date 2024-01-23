@@ -10,10 +10,11 @@
 
 sonarqube:
   extends: .security
-  # If external test results are included, these jobs need to run first
+  # If external test results are included, their artifacts are required
   needs:
-    - hadolint
+    - dependency-check
     - grype
+    - hadolint
   variables:
     GIT_DEPTH: 1
     GIT_STRATEGY: fetch
@@ -27,14 +28,15 @@ sonarqube:
       - .sonar/cache
   script:
     - >
-      ls -als reports/ ;
       sonar-scanner
-      -Dsonar.host.url=${SONAR_URL}
+      -Dsonar.dependencyCheck.htmlReportPath=reports/dependency-check-report.html
+      -Dsonar.dependencyCheck.jsonReportPath=reports/dependency-check-report.json
       -Dsonar.docker.hadolint.reportPaths=reports/hadolint-report.json
-      -Dsonar.projectKey=${CI_PROJECT_TITLE}
-      -Dsonar.path.temp=${RUNNER_TEMP_PROJECT_DIR}
-      -Dsonar.grype.reportPath=reports/grype-report.json
       -Dsonar.grype.htmlReportPath=reports/grype-report.html
+      -Dsonar.grype.reportPath=reports/grype-report.json
+      -Dsonar.host.url=${SONAR_URL}
+      -Dsonar.path.temp=${RUNNER_TEMP_PROJECT_DIR}
+      -Dsonar.projectKey=${CI_PROJECT_TITLE}
   rules:
     - if: "$SONAR_TOKEN != null"
       when: always
