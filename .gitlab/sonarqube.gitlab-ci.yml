@@ -26,7 +26,15 @@ sonarqube:
     paths:
       - .sonar/cache
   script:
-    - sonar-scanner -Dsonar.host.url=${SONAR_URL} -Dsonar.projectKey=${CI_PROJECT_TITLE} -Dsonar.path.temp=${RUNNER_TEMP_PROJECT_DIR}
+    - >
+      ls -als reports/ ;
+      sonar-scanner
+      -Dsonar.host.url=${SONAR_URL}
+      -Dsonar.docker.hadolint.reportPaths=reports/hadolint-report.json
+      -Dsonar.projectKey=${CI_PROJECT_TITLE}
+      -Dsonar.path.temp=${RUNNER_TEMP_PROJECT_DIR}
+      -Dsonar.grype.reportPath=reports/grype-report.json
+      -Dsonar.grype.htmlReportPath=reports/grype-report.html
   rules:
     - if: "$SONAR_TOKEN != null"
-      when: on_success
+      when: always
