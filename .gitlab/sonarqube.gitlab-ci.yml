@@ -9,8 +9,11 @@
 # TOOLS_VERSION  Specifies which version of gofwd/tools-image is being used
 
 sonarqube:
-  extends: .sast
-  dependencies: []
+  extends: .security
+  # If external test results are included, these jobs need to run first
+  needs:
+    - hadolint
+    - grype
   variables:
     GIT_DEPTH: 1
     GIT_STRATEGY: fetch
