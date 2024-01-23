@@ -1,0 +1,11 @@
+# Ignore commit-and-tag-version settings
+.versionrc
+# Ignore various formatter and linter settings
+.commitlintrc.yml
+.gitlint
+.prettierignore
+.prettierrc.yml
+.yamllint.yml
+doc8.ini
+# Automated Security Testing: Don't accidentally commit reports
+reports/
