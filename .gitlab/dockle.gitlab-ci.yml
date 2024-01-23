@@ -21,6 +21,8 @@ dockle:
     entrypoint: [""]
   script:
     - mkdir -p reports || true
+    # Check if the configuration directory exists and if so, execute from there
+    # This allows configuration files to be read
     - >
       if [[ -d "$CONFIGURATION" ]]; then
       cd "${CONFIGURATION}" ;
