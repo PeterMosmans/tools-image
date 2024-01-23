@@ -10,14 +10,21 @@
 grype:
   extends: .security
   image: gofwd/tools-image:$TOOLS_VERSION
+  before_script:
+    - mkdir -p reports 1>/dev/null || true
   script:
     - >
-      mkdir -p reports 1>/dev/null || true ;
       grype docker-archive:${IMAGE_TAR}
       --output json=reports/grype-report.json
       --output table=reports/grype-report.txt
-      --fail-on medium ;
-      cat reports/grype-report.txt
+      --output template=reports/grype-report.html
+      -t /usr/local/lib/html-table.tmpl
+      --fail-on medium
+  # Always show report
+  after_script:
+    - cat reports/grype-report.txt
+  # Continue other tests, even if this one fails
+  allow_failure: true
   artifacts:
     paths:
       - reports/grype-report.*

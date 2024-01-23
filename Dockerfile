@@ -73,6 +73,7 @@ RUN curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh |
 FROM node:21-bookworm-slim as release
 # Default entry point
 WORKDIR /workdir
+COPY html-table.tmpl /usr/local/lib/html-table.tmpl
 
 COPY --chown=999:999 --from=build /opt/venv /opt/venv
 COPY --from=build /usr/lib/jwt_tool/ /usr/lib/jwt_tool/
