@@ -5,11 +5,12 @@
 
 variables:
   # Tool-specific: Image versions
+  DEPENDENCY_VERSION: 9.0.9
   DIVE_VERSION: v0.11
   DOCKLE_VERSION: v0.4.13
   HADOLINT_VERSION: v2.12.0-debian
   TOOLS_VERSION: 1.8.0
-  DEPENDENCY_VERSION: 9.0.9
+  TRIVY_VERSION: 0.48.3
 
   # Tool-specific: Generic cache directory
   CACHE_DIR: /srv/cache
@@ -47,6 +48,8 @@ include:
   - .gitlab/dockle.gitlab-ci.yml
   # security
   - .gitlab/grype.gitlab-ci.yml
+  # security
+  - .gitlab/trivy.gitlab-ci.yml
   # test
   - .gitlab/test.gitlab-ci.yml
 

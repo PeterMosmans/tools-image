@@ -1,0 +1,31 @@
+---
+# Job template - to be used in a pipeline by including this file.
+#
+# Analyzes a Docker image using Grype.
+#
+# Variables:
+# CACHE_DIR          General cache directory
+# IMAGE_TAR          Name of the Docker image (in tar format)
+# TRIVY_VERSION      Specifies which version of aquasec/trivy is being used
+
+trivy:
+  extends: .security
+  image:
+    name: aquasec/trivy:${TRIVY_VERSION}
+    entrypoint: [""]
+  before_script:
+    - mkdir -p reports 1>/dev/null || true
+  script:
+    - >
+      trivy --cache-dir ${CACHE_DIR}/trivy
+      image --input ${IMAGE_TAR}
+      --output reports/trivy-report.txt
+  # Always show report
+  after_script:
+    - cat reports/trivy-report.txt
+  # Continue other tests, even if this one fails
+  allow_failure: true
+  artifacts:
+    paths:
+      - reports/trivy-report.*
+    when: always
