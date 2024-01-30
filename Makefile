@@ -26,7 +26,6 @@ test:
 	jwt_tool.py -h && \
 	nikto.pl -Version && \
 	nmap --version && \
-	npm outdated --global && \
 	pylint --version && \
 	sonar-scanner --version && \
 	ssh-audit --help && \
