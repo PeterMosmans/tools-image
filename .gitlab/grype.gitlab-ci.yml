@@ -4,6 +4,7 @@
 # Analyzes a Docker image using Grype.
 #
 # Variables:
+# CACHE_DIR          General cache directory
 # IMAGE_TAR     Name of the Docker image (in tar format)
 # TOOLS_VERSION Specifies which version of gofwd/tools-image is being used
 
@@ -14,6 +15,7 @@ grype:
     - mkdir -p reports 1>/dev/null || true
   script:
     - >
+      GRYPE_DB_CACHE_DIR=${CACHE_DIR}/grype
       grype docker-archive:${IMAGE_TAR}
       --output json=reports/grype-report.json
       --output table=reports/grype-report.txt

@@ -11,6 +11,8 @@ variables:
   TOOLS_VERSION: 1.8.0
   DEPENDENCY_VERSION: 9.0.9
 
+  # Tool-specific: Generic cache directory
+  CACHE_DIR: /srv/cache
   # Tool-specific: The directory where configuration files can be found
   CONFIGURATION: automated_security_tests
 
