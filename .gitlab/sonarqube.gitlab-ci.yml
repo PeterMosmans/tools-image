@@ -1,20 +1,23 @@
 ---
-# Job template - to be used in a pipeline by including this file.
+# SPDX-License-Identifier: GPL-3.0-or-later
+# (c) 2020-2024 Peter Mosmans [Go Forward]
 #
 # Executes SonarScanner and uploads results to SonarQube.
 #
 # Variables:
-# SONAR_TOKEN    SonarQube access token
-# SONAR_URL      Location of SonarQube
-# TOOLS_VERSION  Specifies which version of gofwd/tools-image is being used
+# SONAR_TOKEN        SonarQube access token
+# SONAR_URL          Location of SonarQube
+# TOOLS_VERSION      Specifies which version of gofwd/tools-image is being used
 
 sonarqube:
+  # Even though this is primarily a SAST tool, it uses build artifacts
   extends: .security
   # If external test results are included, their artifacts are required
   needs:
     - dependency-check
     - grype
     - hadolint
+    - trivy
   variables:
     GIT_DEPTH: 1
     GIT_STRATEGY: fetch
@@ -32,11 +35,14 @@ sonarqube:
       -Dsonar.dependencyCheck.htmlReportPath=reports/dependency-check-report.html
       -Dsonar.dependencyCheck.jsonReportPath=reports/dependency-check-report.json
       -Dsonar.docker.hadolint.reportPaths=reports/hadolint-report.json
+      -Dsonar.exclusions=reports/**
+      -Dsonar.externalIssuesReportPaths=reports/njsscan-report.json
       -Dsonar.grype.htmlReportPath=reports/grype-report.html
       -Dsonar.grype.reportPath=reports/grype-report.json
       -Dsonar.host.url=${SONAR_URL}
       -Dsonar.path.temp=${RUNNER_TEMP_PROJECT_DIR}
       -Dsonar.projectKey=${CI_PROJECT_TITLE}
+      -Dsonar.sarifReportPaths=reports/zap-report.sarif.json,reports/trivy-report.sarif.json,reports/dependency-check-report.sarif
   rules:
     - if: "$SONAR_TOKEN != null"
       when: always

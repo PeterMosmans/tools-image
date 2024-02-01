@@ -1,12 +1,13 @@
 ---
-# Job template - to be used in a pipeline by including this file.
+# SPDX-License-Identifier: GPL-3.0-or-later
+# (c) 2020-2024 Peter Mosmans [Go Forward]
 #
-# Uploads an SBOM file to a Dependency-Track server.
+# Uploads SBOM files to a Dependency-Track server.
 #
 # Variables:
-# DTRACK_KEY     Dependency-Track access token (API key)
-# DTRACK_URL     Location of Dependency-Track API server
-# TOOLS_VERSION  Specifies which version of gofwd/tools-image is being used
+# DTRACK_KEY         Dependency-Track access token (API key)
+# DTRACK_URL         Location of Dependency-Track API server
+# TOOLS_VERSION      Specifies which version of gofwd/tools-image is being used
 
 dependency-track:
   extends: .security
@@ -20,7 +21,7 @@ dependency-track:
       -H "X-Api-Key: ${DTRACK_KEY}"
       -F "autoCreate=true"
       -F "projectName=${CI_PROJECT_TITLE}"
-      -F "bom=@cyclonedx.json"
+      -F "bom=@bom.json"
   rules:
     - if: "$DTRACK_KEY != null"
       when: on_success

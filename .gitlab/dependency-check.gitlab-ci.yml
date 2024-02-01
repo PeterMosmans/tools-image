@@ -1,5 +1,6 @@
 ---
-# Job template - to be used in a pipeline by including this file.
+# SPDX-License-Identifier: GPL-3.0-or-later
+# (c) 2020-2024 Peter Mosmans [Go Forward]
 #
 # Detects whether outdated and insecure libraries are in use by running Dependency-Check.
 #
@@ -31,17 +32,21 @@ dependency-check:
       EXTRA_PARMS="" ;
       fi ;
       /usr/share/dependency-check/bin/dependency-check.sh
-      --data ${CACHE_DIR}/dependency-check
       --enableExperimental
-      --exclude "**/*.tgz" --exclude "**/*.zip"
+      --exclude "**/*.tgz"
+      --exclude "**/*.zip"
       --failOnCVSS 6
-      --format HTML --format JSON
+      --format HTML
+      --format JSON
+      --format SARIF
       --out reports
       --project ${CI_PROJECT_NAME}
+      --data ${CACHE_DIR}/dependency-check
       --scan . ${EXTRA_PARMS}
   artifacts:
     name: "$CI_JOB_NAME artifacts from $CI_PROJECT_NAME on $CI_COMMIT_REF_SLUG"
     when: always
     paths:
       - reports/dependency-check-report.*
+  # Only flag the job as failed, not the whole pipeline
   allow_failure: true

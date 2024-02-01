@@ -1,7 +1,8 @@
 ---
-# Job template - to be used in a pipeline by including this file.
+# SPDX-License-Identifier: GPL-3.0-or-later
+# (c) 2020-2024 Peter Mosmans [Go Forward]
 #
-# Analyzes a Docker image using Grype.
+# Analyzes a Docker image using Trivy.
 #
 # Variables:
 # CACHE_DIR          General cache directory
@@ -14,18 +15,22 @@ trivy:
     name: aquasec/trivy:${TRIVY_VERSION}
     entrypoint: [""]
   before_script:
-    - mkdir -p reports 1>/dev/null || true
+    - mkdir -p reports &>/dev/null || true
   script:
     - >
       trivy --cache-dir ${CACHE_DIR}/trivy
       image --input ${IMAGE_TAR}
-      --output reports/trivy-report.txt
+      --format json
+      --output reports/trivy-report.json ;
+      trivy convert --format table --output reports/trivy-report.txt reports/trivy-report.json ;
+      trivy convert --format sarif --output reports/trivy-report.sarif.json reports/trivy-report.json
   # Always show report
   after_script:
     - cat reports/trivy-report.txt
-  # Continue other tests, even if this one fails
-  allow_failure: true
   artifacts:
+    name: "$CI_JOB_NAME artifacts from $CI_PROJECT_NAME on $CI_COMMIT_REF_SLUG"
+    when: always
     paths:
       - reports/trivy-report.*
-    when: always
+  # Continue other tests, even if this one fails
+  allow_failure: true

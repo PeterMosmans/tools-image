@@ -1,24 +1,21 @@
 ---
-# Job template - to be used in a pipeline by including this file.
+# SPDX-License-Identifier: GPL-3.0-or-later
+# (c) 2020-2024 Peter Mosmans [Go Forward]
 #
-# Builds a Docker image and stores the CycloneDX SBOM file as well as Docker image as tar file
+# Builds a Docker image and stores the Docker image as tar file, as well as SBOMs.
 #
 # Variables:
-# IMAGE_TAG      Docker image tag
-# IMAGE_TAR      Name of the Docker image in tar format
+# IMAGE_TAG          Docker image tag
+# IMAGE_TAR          Name of the Docker image in tar format
 
 build:
-  # Ensure a "clean" build environment
-  variables:
-    GIT_DEPTH: 1
-    GIT_STRATEGY: clone
   extends: .build
   script:
-    - DOCKER_BUILDKIT=1 docker build -t ${IMAGE_TAG} .
     - >
+      DOCKER_BUILDKIT=1 docker build -t ${IMAGE_TAG} . ;
       docker save ${IMAGE_TAG} > ${IMAGE_TAR} ;
       temp_container=$(docker create ${IMAGE_TAG}) ;
-      docker cp "$temp_container:/opt/venv/sbom.json" sbom.json ;
+      docker cp "$temp_container:/opt/venv/sbom.json" bom.json ;
       docker rm "$temp_container"
   artifacts:
     expire_in: 1 week
@@ -26,4 +23,4 @@ build:
     when: always
     paths:
       - ${IMAGE_TAR}
-      - sbom.json
+      - bom.json

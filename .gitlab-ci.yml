@@ -1,5 +1,8 @@
 ---
-# Pipeline template
+# SPDX-License-Identifier: GPL-3.0-or-later
+# (c) 2020-2024 Peter Mosmans [Go Forward]
+
+# Pipeline template for automated security testing
 
 ### Variables used throughout the pipeline
 
@@ -15,7 +18,7 @@ variables:
   # Tool-specific: Generic cache directory
   CACHE_DIR: /srv/cache
   # Tool-specific: The directory where configuration files can be found
-  CONFIGURATION: automated_security_tests
+  CONFIGURATION: automated_security_testing
 
   # Generic information
   DOCKER_DRIVER: overlay2
@@ -67,17 +70,30 @@ stages:
 
 ### Jobs
 
-# All jobs that start with a dot are templates and can be extended
-# This facilitates directed acyclic graph pipelines
-# The needs keyword requires a job name
+# All jobs that start with a dot are templates and can be extended: This
+# facilitates directed acyclic graph pipelines. The 'needs' keyword requires a
+# job name.
 
 .sast:
   stage: sast
+  # No artifacts from previous stages are required
+  dependencies: []
+  # Source code is necessary
+  variables:
+    GIT_DEPTH: 1
+    GIT_STRATEGY: fetch
+  # Only run after detect-secrets ran successfully
   needs:
     - detect-secrets
 
 .build:
   stage: build
+  # No artifacts from previous stages are required
+  dependencies: []
+  # Ensure a "clean" build environment
+  variables:
+    GIT_DEPTH: 1
+    GIT_STRATEGY: clone
   needs:
     - detect-secrets
 

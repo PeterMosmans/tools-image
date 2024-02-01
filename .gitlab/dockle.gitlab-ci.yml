@@ -1,10 +1,11 @@
 ---
-# Job template - to be used in a pipeline by including this file.
+# SPDX-License-Identifier: GPL-3.0-or-later
+# (c) 2020-2024 Peter Mosmans [Go Forward]
 #
 # Lints a Docker image using Dockle.
+# Optional configuration will be read from .dockleignore
 #
 # Variables:
-# CONFIGURATION      Directory where .dockleignore can be found
 # DOCKLE_VERSION     Specifies which version of goodwithtech/dockle is being used
 # IMAGE_TAR          Name of the Docker image in tar format
 
@@ -19,21 +20,17 @@ dockle:
   image:
     name: goodwithtech/dockle:${DOCKLE_VERSION}
     entrypoint: [""]
+  before_script:
+    - mkdir -p reports &>/dev/null || true
   script:
-    - mkdir -p reports || true
-    # Check if the configuration directory exists and if so, execute from there
-    # This allows configuration files to be read
-    - >
-      if [[ -d "$CONFIGURATION" ]]; then
-      cd "${CONFIGURATION}" ;
-      dockle --input ../${IMAGE_TAR} --exit-code 1 |
-      tee ../reports/dockle-report.txt ;
-      else
-      dockle --input ${IMAGE_TAR} --exit-code 1 |
-      tee reports/dockle-report.txt ;
-      fi
+    - dockle --input ${IMAGE_TAR} --exit-code 1 > reports/dockle-report.txt
+  # Always show report
+  after_script:
+    - cat reports/dockle-report.txt
   artifacts:
+    name: "$CI_JOB_NAME artifacts from $CI_PROJECT_NAME on $CI_COMMIT_REF_SLUG"
     when: always
     paths:
-      - reports/dockle-report.txt
-
+      - reports/dockle-report.*
+  # Only flag the job as failed, not the whole pipeline
+  allow_failure: true
