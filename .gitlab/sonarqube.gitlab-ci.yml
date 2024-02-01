@@ -36,13 +36,12 @@ sonarqube:
       -Dsonar.dependencyCheck.jsonReportPath=reports/dependency-check-report.json
       -Dsonar.docker.hadolint.reportPaths=reports/hadolint-report.json
       -Dsonar.exclusions=reports/**
-      -Dsonar.externalIssuesReportPaths=reports/njsscan-report.json
       -Dsonar.grype.htmlReportPath=reports/grype-report.html
       -Dsonar.grype.reportPath=reports/grype-report.json
       -Dsonar.host.url=${SONAR_URL}
       -Dsonar.path.temp=${RUNNER_TEMP_PROJECT_DIR}
       -Dsonar.projectKey=${CI_PROJECT_TITLE}
-      -Dsonar.sarifReportPaths=reports/zap-report.sarif.json,reports/trivy-report.sarif.json,reports/dependency-check-report.sarif
+      -Dsonar.sarifReportPaths=reports/trivy-report.sarif.json,reports/dependency-check-report.sarif
   rules:
     - if: "$SONAR_TOKEN != null"
       when: always
