@@ -3,6 +3,7 @@
 # (c) 2020-2024 Peter Mosmans [Go Forward]
 #
 # Analyzes a Docker image using Grype.
+# Optional configuration will be read from .grype.yaml
 #
 # Variables:
 # CACHE_DIR          General cache directory
@@ -10,6 +11,10 @@
 # TOOLS_VERSION      Specifies which version of gofwd/tools-image is being used
 
 grype:
+  variables:
+    # We might want to read the .grype.yaml file in the root directory
+    GIT_DEPTH: 1
+    GIT_STRATEGY: fetch
   extends: .security
   image: gofwd/tools-image:${TOOLS_VERSION}
   before_script:

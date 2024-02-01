@@ -16,7 +16,7 @@ dive:
   before_script:
     - mkdir -p reports &>/dev/null || true
   script:
-    - dive --ci ${IMAGE_TAG} >reports/dive-report.txt
+    - dive --ci ${IMAGE_TAG} > reports/dive-report.txt
   # Always show report
   after_script:
     - cat reports/dive-report.txt
