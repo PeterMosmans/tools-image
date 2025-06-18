@@ -1,5 +1,32 @@
 # Changelog
 
+## [1.9.0](https://github.com/PeterMosmans/tools-image/compare/1.8.0...1.9.0) (2025-06-18)
+
+
+### Features
+
+* add shcheck.py to tools ([3000428](https://github.com/PeterMosmans/tools-image/-/commit/3000428acd137614625734428f6412edced873bd))
+* add test for testssl.sh ([8c77c95](https://github.com/PeterMosmans/tools-image/-/commit/8c77c950de46ceee2152a4572bb6956d9c821c98))
+* add tests ([502b024](https://github.com/PeterMosmans/tools-image/-/commit/502b02404c09cd66de4ccdad02f060b687ef9949))
+* add Trivy ([33ce6f9](https://github.com/PeterMosmans/tools-image/-/commit/33ce6f9bc193c8ff165f84adb4029780e7945273))
+* improve automated security tests ([ba8527e](https://github.com/PeterMosmans/tools-image/-/commit/ba8527ede3f4ffc21139a7e2be9341a53b289d8c))
+* read Grype configuration file ([55ab206](https://github.com/PeterMosmans/tools-image/-/commit/55ab206094dade26c7a5dee76d570dc3c51f0605))
+* remove check for outdated libraries from test ([8e1dee3](https://github.com/PeterMosmans/tools-image/-/commit/8e1dee30d50121ec8bb7b78f17c4b0ce7356097b))
+* remove versions out of harness ([10b1680](https://github.com/PeterMosmans/tools-image/-/commit/10b16805bd8239c5b686edd89a0175191d596098))
+* supply Grype configuration file ([8536afb](https://github.com/PeterMosmans/tools-image/-/commit/8536afbc0275a8db1e03ee23053edbd6e8b2ffaa))
+* suppress false positive with regards to ssh-audit ([3cc7bd4](https://github.com/PeterMosmans/tools-image/-/commit/3cc7bd4930608b59f2907971289c1869dab23d93))
+* update Node.js version ([848b404](https://github.com/PeterMosmans/tools-image/-/commit/848b4044ee2cf911281a28f8ff7e756b8b693b10))
+* update versions ([443976e](https://github.com/PeterMosmans/tools-image/-/commit/443976e1d6a3395f1edea6352f986bf46338334c))
+* use shared cache directory ([0d36431](https://github.com/PeterMosmans/tools-image/-/commit/0d36431eb57373a88e06d872fe2b25f9efe674a1))
+
+
+### Bug Fixes
+
+* automatically install jwt_tool requirements ([3ce9fd7](https://github.com/PeterMosmans/tools-image/-/commit/3ce9fd78d2a2e08b674bee69d7725a488e9f2745))
+* don't be too verbose during building ([00cf9c0](https://github.com/PeterMosmans/tools-image/-/commit/00cf9c050909399a18173f823e0199c761bdaa50))
+* don't try to upload unexisting files to SonarQube ([353618d](https://github.com/PeterMosmans/tools-image/-/commit/353618dd83c42b6fa1310bf04e3edfd497fd0cbc))
+* use new cyclonedx-py syntax ([6a02fb2](https://github.com/PeterMosmans/tools-image/-/commit/6a02fb2ffc0b86f67c0e6265387ca3babf2aaec5))
+
 ## [1.8.0](https://github.com/PeterMosmans/tools-image/compare/1.7.0...1.8.0) (2024-01-23)
 
 
