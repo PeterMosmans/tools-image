@@ -42,21 +42,17 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN python3 -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 
-# Install packages as specified in the requirements.txt file
-# hadolint ignore=DL3059
-RUN python3 -m pip install -r requirements.txt --no-cache-dir && \
-    cyclonedx-py -r --format json --output /opt/venv/sbom.json
-
 # Download and unzip sonar-scanner-cli
-RUN curl -sL "https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-${SCANNER}-linux.zip" -o /tmp/scanner.zip && \
+RUN curl -sL "https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-${SCANNER}-linux-x64.zip" -o /tmp/scanner.zip && \
     unzip /tmp/scanner.zip -d /tmp/sonarscanner && \
-    mv "/tmp/sonarscanner/sonar-scanner-${SCANNER}-linux" /usr/lib/sonar-scanner
+    mv "/tmp/sonarscanner/sonar-scanner-${SCANNER}-linux-x64" /usr/lib/sonar-scanner
 
 # Clone jwt_tool
 RUN git clone --depth=1 --branch "${JWT_TOOL}" https://github.com/ticarpi/jwt_tool /tmp/jwt_tool && \
     rm -rf /tmp/jwt_tool/.git && \
     rm -rf /tmp/jwt_tool/.github && \
     rm -f /tmp/jwt_tool/Dockerfile && \
+    python3 -m pip install -r /tmp/jwt_tool/requirements.txt --no-cache-dir && \
     mv /tmp/jwt_tool /usr/lib/jwt_tool && \
     chmod ugo+x /usr/lib/jwt_tool/jwt_tool.py
 
@@ -77,6 +73,11 @@ RUN git clone --depth=1 --branch "${TESTSSL}" https://github.com/drwetter/testss
 # Install Grype
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | sh -s -- -b /usr/local/bin "${GRYPE}"
+
+# Install packages as specified in the requirements.txt file
+# hadolint ignore=DL3059
+RUN python3 -m pip install -r requirements.txt --no-cache-dir && \
+    cyclonedx-py -r --format json --output /opt/venv/sbom.json
 
 FROM node:22-bookworm-slim AS release
 # Default entry point
