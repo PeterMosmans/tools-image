@@ -77,7 +77,7 @@ RUN curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh |
 # Install packages as specified in the requirements.txt file
 # hadolint ignore=DL3059
 RUN python3 -m pip install -r requirements.txt --no-cache-dir && \
-    cyclonedx-py -r --format json --output /opt/venv/sbom.json
+    cyclonedx-py venv --output-format json --output-file /opt/venv/sbom.json
 
 FROM node:22-bookworm-slim AS release
 # Default entry point
