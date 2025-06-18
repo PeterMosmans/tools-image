@@ -25,7 +25,7 @@ export
 
 # Build image
 image:
-	echo "Building $(DOCKER_IMG)..." && \
+	@echo "Building $(DOCKER_IMG)..." && \
 	DOCKER_BUILDKIT=1 docker build . -t $(DOCKER_IMG) \
 	--build-arg GRYPE=${GRYPE_VERSION} \
 	--build-arg JWT_TOOL=${JWT_VERSION} \
