@@ -10,12 +10,19 @@ LABEL vendor="Go Forward"
 WORKDIR /
 COPY requirements.txt .
 
-ENV DEBIAN_FRONTEND=noninteractive
-ARG GRYPE=v0.74.1 \
-    JWT_TOOL=v2.2.6 \
-    NIKTO=2.5.0 \
-    SCANNER=5.0.1.3006 \
-    TESTSSL=v3.2rc3
+# Versions can be specified as build parameters
+ARG GRYPE \
+    JWT_TOOL \
+    NIKTO \
+    SCANNER \
+    TESTSSL
+
+ENV DEBIAN_FRONTEND=noninteractive \
+    GRYPE=${GRYPE} \
+    JWT_TOOL=${JWT_TOOL} \
+    NIKTO=${NIKTO} \
+    SCANNER=${SCANNER} \
+    TESTSSL=${TESTSSL}
 
 # Install necessary binaries
 # hadolint ignore=DL3008
