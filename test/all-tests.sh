@@ -29,11 +29,12 @@ check_versions() {
     && curl --version \
     && cyclonedx-py --help \
     && detect-secrets --version \
-    && grype --version
-  jwt_tool.py -h \
+    && grype --version \
+    && jwt_tool.py -h \
     && nikto.pl -Version \
     && nmap --version \
     && pylint --version \
+    && shcheck.py --help \
     && sonar-scanner --version \
     && ssh-audit --help \
     && yamllint --version
