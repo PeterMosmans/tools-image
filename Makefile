@@ -8,6 +8,13 @@ TAG     = "latest"
 NAME	!= basename $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 DOCKER_IMG := gofwd/$(NAME):$(TAG)
 
+# Use nice colors in the terminal output
+COL_BLUE=\033[1;34m
+COL_BOLD=\033[1m
+COL_GREEN=\033[32m
+COL_RED=\033[0;31m
+COL_RESET=\033[0m
+COL_YELLOW=\033[0;33m
 
 # Recipes that aren't filenames: This ensures that they always will be executed
 .PHONY: image test
@@ -30,3 +37,8 @@ test:
 	sonar-scanner --version && \
 	ssh-audit --help && \
 	yamllint --version
+
+testimage: # Test the versioned Docker image
+	@echo -e "Testing ${COL_BOLD}$(DOCKER_IMG)${COL_RESET}..." && \
+	docker run -it --workdir / -v ${PWD}/test:/test --rm $(DOCKER_IMG) /bin/bash test/all-tests.sh
+
