@@ -18,13 +18,15 @@ The following tools are available:
 
 - ansible-lint
 - curl
-- cyclonedx-bom
+- cyclonedx-py
 - detect-secrets
 - grype
+- jwt_tool.py
 - nikto.pl
 - nmap
 - npm
 - pylint
+- shcheck.py
 - sonar-scanner
 - ssh-audit
 - testssl.sh
