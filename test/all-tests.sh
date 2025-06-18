@@ -37,6 +37,7 @@ check_versions() {
     && shcheck.py --help \
     && sonar-scanner --version \
     && ssh-audit --help \
+    && testssl.sh --version \
     && yamllint --version
 }
 
