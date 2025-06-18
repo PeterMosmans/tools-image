@@ -1,8 +1,8 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
-# (c) 2022-2024 Peter Mosmans [Go Forward]
+# (c) 2022-2025 Peter Mosmans [Go Forward]
 # Use a base image to build (and download) the tools on
 
-FROM node:21-bookworm-slim AS build
+FROM node:22-bookworm-slim AS build
 
 LABEL maintainer="support@go-forward.net"
 LABEL vendor="Go Forward"
@@ -71,7 +71,7 @@ RUN git clone --depth=1 --branch "${TESTSSL}" https://github.com/drwetter/testss
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | sh -s -- -b /usr/local/bin "${GRYPE}"
 
-FROM node:21-bookworm-slim AS release
+FROM node:22-bookworm-slim AS release
 # Default entry point
 WORKDIR /workdir
 COPY html-table.tmpl /usr/local/lib/html-table.tmpl
